@@ -1,3 +1,4 @@
 # java_algorithm
-*A simple java algorithm repository, just use it for further learning.*  
-*It may contains some exercise problems from Leetcode.*
+*A simple java algorithm repository.*  
+*It contains some exercise problems from Leetcode and some codes from algorithm book.*  
+*Fighting！！！To be a better one*
