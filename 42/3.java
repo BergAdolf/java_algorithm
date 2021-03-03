@@ -1,25 +1,26 @@
-package berg;
-import java.util.*;
-class test{
+class Solution{
 	public int trap(int[] height){
 		if(height.length < 3)
 			return 0;
-		Deque<Integer> stack = new ArrayDeque<Integer>();//创建一个stack
-		int temp = height[0];
+
+		Stack<Integer> stack = new Stack<Integer>();//创建一个stack
+		int distance = 0;
 		int value = 0;
-		stack.addLast(height[0]);
-		
-		for(int i = 1; i < height.length; i++){
-			if(height[i] >= temp){
-				for(int j = 1; j < stack.size(); j++)
-					value += temp - stack.removeLast();
-				stack.removeLast();
-				stack.addLast(height[i]);
-				temp = height[i];
+		int top = 0;
+		int current = 0;
+		int tall = 0;
+
+		while(height.length > current){
+			while(!stack.empty() && height[current] > height[stack.peek()]){ //大于或者等于max,意味着可以弹出元素
+				top = stack.pop();
+				if(stack.empty())
+					break;
+				distance = current - stack.peek() - 1;
+				tall = Math.min(height[current], height[stack.peek()]) - height[top];
+				value = value + tall * distance;
 			}
-			else{
-				stack.addLast(height[i]);
-			}
+			stack.push(current);//，如果小于max,添加元素
+			current = current + 1;
 		}
 		return value;
 
