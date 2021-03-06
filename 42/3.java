@@ -1,3 +1,4 @@
+//堆栈法
 class Solution{
 	public int trap(int[] height){
 		if(height.length < 3)
