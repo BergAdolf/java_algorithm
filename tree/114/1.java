@@ -13,29 +13,31 @@
  *     }
  * }
  */
+//前序遍历：O(n),O(n)
 class Solution {
     public void flatten(TreeNode root) {
 
-    	Deque<TreeNode> stack = new ArrayDeque<>();
+        if(root == null)
+            return;
+        List<TreeNode> list = new ArrayList<>();
+        
+        searchPreOrder(root, list);
+        root.left = null;
+        for(int i = 1; i < list.size(); i++){
+            TreeNode node1 = list.get(i);
+            TreeNode node2 = list.get(i - 1);
+            node2.left = null;
+            node2.right = node1;
+        }
 
-    	TreeNode node;
-    	TreeNode node1 = root;
+    }
 
-    	while(!stack.isEmpty() && node1 != null){
-    		while(node1 != null){
-    			node.left = node1;
-    			stack.addFirst(node1);
-    			node1 = node1.left;
-    		}
-    		node1 = stack.removeFirst();
-    		node1 = node1.right;
-    	}
-    	
-    	node = root;
-    	node1 = root;
-    	while(node.left != null){
-    		node = node.left;
-    		node1.right = node;
-    	}
+    public void searchPreOrder(TreeNode node, List<TreeNode> list){
+        if(node == null)
+            return;
+
+        list.add(node);
+        searchPreOrder(node.left, list);
+        searchPreOrder(node.right, list);
     }
 }
